@@ -52,4 +52,4 @@ if st.button("ready"):
     # X_array = np.array(user_input_values)
     y_pred = clf.predict(X_input.reshape(-1, 14))
     st.metric("Strength", value = float(y_pred))
-    st.write("The RMSE for", model, "is around:", str(RMSE))
+    st.write("The RMSE for the 465 training sample is:", str(RMSE))
