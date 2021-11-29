@@ -8,6 +8,10 @@ import sklearn
 
 # basic title
 st.title("Strength Prediction")
+st.caption("email: bryson_je@hotmail.com")
+st.caption("twitter: @bryson_je")
+
+# basic instruction
 st.write("1. Start by select your **input** values from left side panel")
 st.write("2. Select below the **prediction** algorithm")
 
