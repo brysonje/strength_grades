@@ -5,11 +5,11 @@ import pandas as pd
 import joblib
 import pickle
 import sklearn
+import matplotlib.pyplot as plt
 
 # basic title
 st.title("Strength Prediction")
-st.caption("email: bryson_je@hotmail.com")
-st.caption("twitter: @bryson_je")
+st.caption("bryson_je@hotmail.com")
 
 # basic instruction
 st.write("1. Start by select your **input** values from left side panel")
@@ -18,6 +18,7 @@ st.write("2. Select below the **prediction** algorithm")
 # uploading pickle models
 lnr_model = pickle.load(open("linear_regressor_prediction_trained_model.pkl", "rb"))
 dtr_model = pickle.load(open("decision_tree_regressor_prediction_trained_model.pkl", "rb"))
+df = pd.read_csv("Y1.csv")
 
 # user input by using slider
 st.sidebar.header("Use the slider for your input")
@@ -38,9 +39,9 @@ X14 = st.sidebar.slider("X14", 0.03, 9.10, 4.55)
 
 # select the algorithm
 radio_text = ""
-radio_options = ["linear", "decision tree"]
+radio_options = ["Linear Regression", "Decision Tree Regressor"]
 prediction_model = st.radio(radio_text, radio_options)
-if prediction_model == "linear":
+if prediction_model == "Linear Regression":
     clf, RMSE, model = lnr_model, 2.08, "Linear Regression"
 else:
     clf, RMSE, model = dtr_model, 1.92, "Decision Tree Regression"
@@ -48,9 +49,11 @@ else:
 # start prediction
 st.write("3. Click the button below when **ready**")
 if st.button("ready"):
+    fig, ax = plt.subplots(figsize = (8, 3))
+    ax.hist(df["Y1"], bins = 40)
+    st.pyplot(fig)
     X_input = np.array([X1, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11, X12, X13, X14])
-    # X_array = np.array(user_input_values)
     y_pred = clf.predict(X_input.reshape(-1, 14))
-    st.metric("Strength", value = float(y_pred))
+    st.metric("Strength Prediction", value = float("%.2f" % y_pred))
     st.write("The RMSE for the 465 training samples")
     st.write("when using", model, "is: ", str(RMSE))
