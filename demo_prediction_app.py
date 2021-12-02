@@ -13,7 +13,6 @@ st.caption("bryson_je@hotmail.com")
 
 # basic instruction
 st.write("1. Start by select your **input** values from left side panel")
-st.write("2. Select below the **prediction** algorithm")
 
 # uploading pickle models
 lnr_model = pickle.load(open("linear_regressor_prediction_trained_model.pkl", "rb"))
@@ -38,22 +37,24 @@ X13 = st.sidebar.slider("X13", 0.00, 0.20, 0.10)
 X14 = st.sidebar.slider("X14", 0.03, 9.10, 4.55)
 
 # select the algorithm
-radio_text = ""
-radio_options = ["Linear Regression", "Decision Tree Regressor"]
-prediction_model = st.radio(radio_text, radio_options)
-if prediction_model == "Linear Regression":
-    clf, RMSE, model = lnr_model, 2.08, "Linear Regression"
-else:
-    clf, RMSE, model = dtr_model, 1.92, "Decision Tree Regression"
+clf1, RMSE1, model1 = lnr_model, 2.08, "Linear Regression"
+clf2, RMSE2, model2 = dtr_model, 1.92, "Decision Tree Regression"
 
 # start prediction
-st.write("3. Click the button below when **ready**")
+st.write("2. Click the button below when **ready**")
 if st.button("ready"):
-    fig, ax = plt.subplots(figsize = (8, 3))
+    fig, ax = plt.subplots(figsize = (6, 2))
     ax.hist(df["Y1"], bins = 40)
     st.pyplot(fig)
     X_input = np.array([X1, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11, X12, X13, X14])
-    y_pred = clf.predict(X_input.reshape(-1, 14))
-    st.metric("Strength Prediction", value = float("%.2f" % y_pred))
-    st.write("The RMSE for the 465 training samples")
-    st.write("when using", model, "is: ", str(RMSE))
+    col1, col2 = st.columns(2)
+    with col1:
+        y_pred1 = clf1.predict(X_input.reshape(-1, 14))
+        st.metric("Strength Prediction", value = float("%.2f" % y_pred1))
+        st.write("The RMSE for the 465 training samples")
+        st.write("when using", model1, "is: ", str(RMSE1))
+    with col2:
+        y_pred2 = clf2.predict(X_input.reshape(-1, 14))
+        st.metric("Strength Prediction", value = float("%.2f" % y_pred2))
+        st.write("The RMSE for the 465 training samples")
+        st.write("when using", model2, "is: ", str(RMSE2))
