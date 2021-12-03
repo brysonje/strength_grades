@@ -40,8 +40,8 @@ X13 = st.sidebar.slider("X13", 0.00, 0.20, 0.10)
 X14 = st.sidebar.slider("X14", 0.03, 9.10, 4.55)
 
 # select the algorithm
-clf1, RMSE1, model1 = lnr_model, 2.08, "Linear Regression"
-clf2, RMSE2, model2 = dtr_model, 1.92, "Decision Tree Regression"
+clf1, RMSE1, model1 = lnr_model, 2.08, "**Linear Regression**"
+clf2, RMSE2, model2 = dtr_model, 1.92, "**Decision Tree Regression**"
 RMSE3, model3 = 1.52, "**Ensemble**"
 lnr_coef, dtr_coef = 0.215, 0.785
 
