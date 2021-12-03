@@ -52,7 +52,7 @@ if st.button("ready"):
     ax.hist(df["Y1"], bins = 40)
     st.pyplot(fig)
     X_input = np.array([X1, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11, X12, X13, X14])
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     with col1:
         y_pred1 = clf1.predict(X_input.reshape(-1, 14))
         st.write(model1)
