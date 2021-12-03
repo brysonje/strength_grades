@@ -7,6 +7,9 @@ import pickle
 import sklearn
 import matplotlib.pyplot as plt
 
+# this is to set a restart button
+restart_button = 0
+
 # basic title
 st.title("Strength Prediction")
 st.caption("bryson_je@hotmail.com")
@@ -58,3 +61,6 @@ if st.button("ready"):
         st.metric("Strength Prediction", value = float("%.2f" % y_pred2))
         st.write("The RMSE for the 465 training samples")
         st.write("when using", model2, "is: ", str(RMSE2))
+    if st.button("Click to restart"):
+        if restart_button == 0:
+            restart_button == 0
