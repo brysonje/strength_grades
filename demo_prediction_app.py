@@ -42,6 +42,8 @@ X14 = st.sidebar.slider("X14", 0.03, 9.10, 4.55)
 # select the algorithm
 clf1, RMSE1, model1 = lnr_model, 2.08, "Linear Regression"
 clf2, RMSE2, model2 = dtr_model, 1.92, "Decision Tree Regression"
+RMSE3, model3 = 1.52, "**Ensemble**"
+lnr_coef, dtr_coef = 0.215, 0.785
 
 # start prediction
 st.write("2. Click the button below when **ready**")
@@ -53,14 +55,19 @@ if st.button("ready"):
     col1, col2 = st.columns(2)
     with col1:
         y_pred1 = clf1.predict(X_input.reshape(-1, 14))
+        st.write(model1)
         st.metric("Strength Prediction", value = float("%.2f" % y_pred1))
-        st.write("The RMSE for the 465 training samples")
-        st.write("when using", model1, "is: ", str(RMSE1))
+        st.write("RMSE(cv) is:", str(RMSE1))
     with col2:
         y_pred2 = clf2.predict(X_input.reshape(-1, 14))
+        st.write(model2)
         st.metric("Strength Prediction", value = float("%.2f" % y_pred2))
-        st.write("The RMSE for the 465 training samples")
-        st.write("when using", model2, "is: ", str(RMSE2))
+        st.write("RMSE(cv) is:", str(RMSE2))
+    with col3:
+        y_pred3 = (y_pred1 * lnr_coef + y_pred2 * dtr_coef)
+        st.write(model3)
+        st.metric("Strength Prediction", value = float("%.2f" % y_pred3))
+        st.write("RMSE(cv) is :", str(RMSE3))
     if st.button("Click to restart"):
         if restart_button == 0:
             restart_button == 0
