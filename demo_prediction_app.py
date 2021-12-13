@@ -12,7 +12,11 @@ restart_button = 0
 
 # basic title
 st.title("Strength Prediction")
-st.caption("bryson_je@hotmail.com")
+col1, col2 = st.columns(2)
+with col1:
+    st.caption("bryson_je@hotmail.com")
+with col2:
+    st.write("**Basic Data Visualization** [link](https://basicdatavisualization.herokuapp.com)")
 
 # basic instruction
 st.write("1. Start by select your **input** values from left side panel")
